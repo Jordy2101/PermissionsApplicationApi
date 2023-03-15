@@ -46,7 +46,7 @@ namespace PermissionsApplication.DataAccess.Repositories.Base
         {
             var result = entities.Add(entity);
             this.RepositoryContext.SaveChanges();
-            return Convert.ToInt32(result.Property("ID").CurrentValue.ToString());
+            return Convert.ToInt32(result.Property("Id").CurrentValue.ToString());
         }
 
         public virtual void CreateRange(List<T> entitys)

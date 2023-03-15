@@ -38,7 +38,7 @@ namespace PermissionsApplication.Common.Paged
         {
         }
 
-        public static PagedList<T> Create(IQueryable<T> source, int pageNumber, int pageSize)
+        public static PagedList<T> Create(IEnumerable<T> source, int pageNumber, int pageSize)
         {
             if (pageNumber == 0) pageNumber = 1;
             var count = source.Count();

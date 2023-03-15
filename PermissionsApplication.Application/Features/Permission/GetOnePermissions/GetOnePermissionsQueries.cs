@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PermissionsApplication.Application.DTOs;
 using PermissionsApplication.Application.Exceptions;
 using PermissionsApplication.Common.Messages;
@@ -20,7 +21,7 @@ namespace PermissionsApplication.Application.Features.Permission.GetOnePermissio
         {
             try
             {
-                var data = _repository.GetOne(id);
+                var data = _repository.FindByCondition(c=> c.Id == id).Include(c=> c.TypePermissions).FirstOrDefault();
 
                 data = data is null ? throw new NotFoundException(MessageCodes.EmptyCollections, id) : data;
 

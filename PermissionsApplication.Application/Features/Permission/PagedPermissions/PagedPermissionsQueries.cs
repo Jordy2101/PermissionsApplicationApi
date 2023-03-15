@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PermissionsApplication.Application.DTOs;
 using PermissionsApplication.Application.Exceptions;
 using PermissionsApplication.Common.Dto;
@@ -28,12 +29,12 @@ namespace PermissionsApplication.Application.Features.Permission.PagedPermission
         {
             try
             {
-                var data = filter.Keyword is null ? _repository.FindAll() : 
-                                                    _repository.FindByCondition(c => c.FirstnameEmployee.Contains(filter.Keyword) || c.LastnameEmployee.Contains(filter.Keyword));
+                var data = filter.Keyword is null ? _repository.FindAll().Include(c=> c.TypePermissions) : 
+                                                    _repository.FindByCondition(c => c.FirstnameEmployee.Contains(filter.Keyword) || c.LastnameEmployee.Contains(filter.Keyword)).Include(c=> c.TypePermissions);
 
                 data = !data.Any() ? throw new NotFoundException(MessageCodes.EmptyCollections, filter) : data;
 
-                var map = _mapper.Map<IQueryable<PermissionsDto>>(data);
+                var map = _mapper.Map<IEnumerable<PermissionsDto>>(data);
 
                 var pag = PagedList<PermissionsDto>.Create(map, filter.PageNumber, filter.PageSize);
 

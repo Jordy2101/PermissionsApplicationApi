@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PermissionsApplication.Domain.PermissionsApplication
 {
+    [Table("Permissions", Schema = "dbo")]
     public class Permissions
     {
         [Key]
