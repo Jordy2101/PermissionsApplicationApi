@@ -9,6 +9,6 @@ namespace PermissionsApplication.Application.Features.Permission.DeletePermissio
 {
     public interface IDeletePermissionsCommand
     {
-        Task DeletePermissions(PermissionsDto dto);
+        Task DeletePermissions(int id);
     }
 }

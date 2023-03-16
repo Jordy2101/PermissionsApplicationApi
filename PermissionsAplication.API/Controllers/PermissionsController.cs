@@ -29,11 +29,11 @@ namespace PermissionsAplication.API.Controllers
             _updateCommand = updateCommand;
         }
 
-        [HttpPost("CreatePermisssion")]
-        public IActionResult CreatePermisssion(PermissionsDto dto) => Ok(_createCommand.CreatePermission(dto));
+        [HttpPost("CreatePermission")]
+        public IActionResult CreatePermisssion( [FromBody] PermissionsDto dto) => Ok(_createCommand.CreatePermission(dto));
 
-        [HttpDelete("DeletePermissions")]
-        public IActionResult DeletePermissions(PermissionsDto dto) => Ok(_deleteCommand.DeletePermissions(dto));
+        [HttpDelete("DeletePermissions/{id}")]
+        public IActionResult DeletePermissions(int id) => Ok(_deleteCommand.DeletePermissions(id));
 
         [HttpGet("GetOne/{id}")]
         public IActionResult GetOne(int id) => Ok(_getOneCommand.GetOnePemissions(id));

@@ -28,6 +28,8 @@ namespace PermissionsApplication.Application.Features.Permission.UpdatePermissio
             {
                 var map = _mapper.Map<Permissions>(dto);
 
+                map.TypePermissions = null;
+
                 var validationRules = new PermissionsValidations();
                 var result = validationRules.Validate(map);
 
@@ -38,7 +40,7 @@ namespace PermissionsApplication.Application.Features.Permission.UpdatePermissio
                 }
 
                 var validationEntity = _repository.FindByCondition(c => c.FirstnameEmployee.Trim().ToUpper() == map.FirstnameEmployee.Trim().ToUpper()
-                                                    && c.LastnameEmployee.Trim().ToUpper() == map.LastnameEmployee.Trim().ToUpper());
+                                                    && c.LastnameEmployee.Trim().ToUpper() == map.LastnameEmployee.Trim().ToUpper() && c.Id != map.Id);
 
                 map = validationEntity.Any() ? throw new ArgumentException(MessageCodes.RecordExist) : map;
 

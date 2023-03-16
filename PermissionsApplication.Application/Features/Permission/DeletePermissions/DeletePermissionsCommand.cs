@@ -21,13 +21,13 @@ namespace PermissionsApplication.Application.Features.Permission.DeletePermissio
             _mapper = mapper;
         }
 
-        public async Task DeletePermissions(PermissionsDto dto)
+        public async Task DeletePermissions(int id)
         {
             try
             {
-                var map = _mapper.Map<Permissions>(dto);
+                var data = _repository.GetOne(id);
 
-                 _repository.Delete(map);
+                 _repository.Delete(data);
             }
             catch (Exception ex)
             {
